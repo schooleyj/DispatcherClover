@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.schoo_000.dispatchalpha_v1.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/job_name_label"
+        android:textSize="36sp"
+        android:layout_alignBaseline="@+id/job_name"
+        android:layout_alignBottom="@+id/job_name"
+        android:layout_alignParentStart="true"
+        android:text="@string/job_name_label" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/job_name"
+        android:ems="10"
+        android:layout_marginStart="36dp"
+        android:id="@+id/job_name"
+        android:textSize="36sp"
+        android:layout_marginTop="20dp"
+        android:textColor="?android:attr/textColorSecondaryInverseNoDisable"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/job_name_label" />
+
+    <Button
+        android:text="@string/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="38dp"
+        android:id="@+id/submit_button"
+        android:textSize="36sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/job_name" />
+</RelativeLayout>

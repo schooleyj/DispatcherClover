@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DispatchAlpha_V1</string>
+    <string name="job_name_label">Job:</string>
+    <string name="job_name">Description</string>
+    <string name="submit_button">Submit</string>
+    <string name="submit">Submit</string>
+</resources>
