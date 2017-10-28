@@ -1,7 +1,18 @@
 <resources>
     <string name="app_name">DispatchAlpha_V1</string>
-    <string name="job_name_label">Job:</string>
-    <string name="job_name">Description</string>
+    <string name="job_name_label">Job Title:</string>
+    <string name="job_name">Title</string>
     <string name="submit_button">Submit</string>
     <string name="submit">Submit</string>
+    <string name="job_description_label">Description:</string>
+    <string name="header_label">Welcome to Dispatcher!</string>
+    <string name="phone_label">Phone #:</string>
+    <string name="address_label">Address:</string>
+    <string name="address">123 Apple Street</string>
+    <string name="email_label">Email:</string>
+    <string name="phone">123-456-7890</string>
+    <string name="email">johndoe@hotmail.com</string>
+    <string name="submit_business">Submit</string>
+    <string name="description">Description</string>
+    <string name="description_label">Description:</string>
 </resources>

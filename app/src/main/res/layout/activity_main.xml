@@ -14,11 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/job_name_label"
-        android:textSize="36sp"
+        android:textSize="30sp"
         android:layout_alignBaseline="@+id/job_name"
         android:layout_alignBottom="@+id/job_name"
         android:layout_alignParentStart="true"
-        android:text="@string/job_name_label" />
+        android:text="@string/job_name_label"
+        android:enabled="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -28,7 +29,7 @@
         android:ems="10"
         android:layout_marginStart="36dp"
         android:id="@+id/job_name"
-        android:textSize="36sp"
+        android:textSize="30sp"
         android:layout_marginTop="20dp"
         android:textColor="?android:attr/textColorSecondaryInverseNoDisable"
         android:layout_alignParentTop="true"
@@ -43,4 +44,27 @@
         android:textSize="36sp"
         android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/job_name" />
+
+    <TextView
+        android:text="@string/job_description_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:id="@+id/job_description_label"
+        android:textSize="30sp"
+        android:layout_below="@+id/job_name"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/description"
+        android:singleLine="false"
+        android:text="@string/description"
+        android:layout_alignBaseline="@+id/job_description_label"
+        android:layout_alignBottom="@+id/job_description_label"
+        android:layout_alignStart="@+id/submit_button" />
+
 </RelativeLayout>
