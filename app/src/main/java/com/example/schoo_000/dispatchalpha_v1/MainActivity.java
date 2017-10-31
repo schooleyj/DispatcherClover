@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+// for now have to do the account thing in the main activity
 public class MainActivity extends AppCompatActivity
 {
 
@@ -70,7 +71,13 @@ public class MainActivity extends AppCompatActivity
     private void sendInfoToURL(String url) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.accumulate("jobTitle", jobNameEditText.getText());
+            // TODO: fill in actual data once merchant sign in is taken care of
+            jsonObject.accumulate("job_title", jobNameEditText.getText());
+            jsonObject.accumulate("job_desc", descriptionEditText.getText());
+            jsonObject.accumulate("merch_id", "<merch_id_here>");
+            jsonObject.accumulate("from_loc", "<from_loc_here>");
+            jsonObject.accumulate("to_loc", "<to_loc_here>");
+            jsonObject.accumulate("bus_phone", "<bus_phone_here>");
         } catch (JSONException ex) {
             // this will never happen
         }
