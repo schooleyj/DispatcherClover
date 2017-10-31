@@ -2,16 +2,13 @@ package com.example.schoo_000.dispatchalpha_v1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.view.View.OnKeyListener;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.Button;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -28,10 +25,13 @@ public class MainActivity extends AppCompatActivity
 {
 
     private EditText jobNameEditText;
+    private EditText descriptionEditText;
     private Button submitButton;
 
     private String jobNameString = "";
+    private String descriptionString = "";
 
+    private String[] jobInfo = {jobNameString, descriptionString};
     private SharedPreferences savedValues;
 
     @Override
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         jobNameEditText = (EditText) findViewById(R.id.job_name);
+        descriptionEditText = (EditText) findViewById(R.id.description);
         submitButton = (Button) findViewById(R.id.submit_button);
 
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     {
         Editor editor = savedValues.edit();
         editor.putString("jobNameString", jobNameString);
+        editor.putString("descriptionString", descriptionString);
         editor.commit();
         super.onPause();
     }
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity
 
         jobNameString = savedValues.getString("jobNameString", "");
         jobNameEditText.setText(jobNameString);
+        descriptionString = savedValues.getString("descriptionString", "");
+        descriptionEditText.setText(descriptionString);
     }
         //Test Comment
 
