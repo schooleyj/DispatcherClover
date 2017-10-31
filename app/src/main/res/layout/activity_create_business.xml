@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_business"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.schoo_000.dispatchalpha_v1.CreateBusiness">
+
+    <TextView
+        android:text="@string/phone_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:id="@+id/phone_label"
+        android:textSize="24sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/phone"
+        android:text="@string/phone"
+        android:textSize="24sp"
+        android:layout_alignBaseline="@+id/phone_label"
+        android:layout_alignBottom="@+id/phone_label"
+        android:layout_toEndOf="@+id/phone_label"
+        android:layout_marginStart="17dp"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:id="@+id/address"
+        android:textSize="24sp"
+        android:text="@string/address"
+        android:layout_alignBaseline="@+id/address_label"
+        android:layout_alignBottom="@+id/address_label"
+        android:layout_alignStart="@+id/phone"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/email"
+        android:text="@string/email"
+        android:textSize="24sp"
+        android:layout_marginStart="13dp"
+        android:layout_alignBaseline="@+id/email_label"
+        android:layout_alignBottom="@+id/email_label"
+        android:layout_toEndOf="@+id/email_label"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:text="@string/submit_business"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/submit_business" />
+
+    <TextView
+        android:text="@string/address_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/address_label"
+        android:textSize="24sp"
+        android:layout_below="@+id/phone"
+        android:layout_toStartOf="@+id/phone" />
+
+    <TextView
+        android:text="@string/email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_label"
+        android:textSize="24sp"
+        android:layout_above="@+id/submit_business"
+        android:layout_alignStart="@+id/address_label" />
+</RelativeLayout>
