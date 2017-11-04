@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DispatcherClover.iml" filepath="$PROJECT_DIR$/DispatcherClover.iml" />
+      <module fileurl="file://C:\Users\jburk\StudioProjects\DispatcherClover\DispatcherClover.iml" filepath="C:\Users\jburk\StudioProjects\DispatcherClover\DispatcherClover.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\jburk\StudioProjects\DispatcherClover\app\app.iml" filepath="C:\Users\jburk\StudioProjects\DispatcherClover\app\app.iml" />
     </modules>
   </component>
 </project>

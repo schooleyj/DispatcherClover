@@ -1,6 +1,7 @@
 package com.example.schoo_000.dispatchalpha_v1;
 
 import android.accounts.Account;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,11 @@ public class MainActivity extends AppCompatActivity
         submitButton = (Button) findViewById(R.id.submit_button);
 
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+
+        boolean firstRun = savedValues.getBoolean("firstRun", true);
+        if (firstRun) {
+            startActivity(new Intent(this, CreateBusiness.class));
+        }
     }
 
     public void onPause()
