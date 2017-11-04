@@ -36,13 +36,15 @@
         android:layout_toEndOf="@+id/job_name_label" />
 
     <Button
-        android:text="@string/submit"
+        android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="38dp"
-        android:id="@+id/submit_button"
-        android:textSize="36sp"
+        android:layout_alignEnd="@+id/job_name"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="38dp"
+        android:onClick="sendJobInfo"
+        android:text="@string/submit"
+        android:textSize="36sp" />
         android:layout_alignEnd="@+id/job_name" />
 
     <TextView
