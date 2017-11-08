@@ -53,8 +53,8 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/email"
-        android:text="@string/email"
+        android:id="@+id/website"
+        android:text="@string/website"
         android:textSize="24sp"
         android:layout_marginStart="13dp"
         android:layout_alignBaseline="@+id/email_label"
@@ -70,6 +70,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="21dp"
         android:layout_marginBottom="25dp"
+        android:onClick="registerBusiness"
         android:id="@+id/submit_business" />
 
     <TextView
@@ -88,8 +89,20 @@
         android:layout_above="@+id/submit_business"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="57dp"
-        android:text="@string/email_label"
+        android:text="@string/website_label"
         android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/businessName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/phone"
+        android:layout_marginTop="14dp"
+        android:inputType="text"
+        android:text="Business Name"
+        android:textSize="24sp"
+        tools:ignore="LabelFor"/>
 
     <TextView
         android:id="@+id/name_label"
@@ -102,15 +115,5 @@
         android:text="@string/name_label"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/businessName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/phone"
-        android:layout_marginTop="14dp"
-        android:inputType="text"
-        android:text="@string/businessName"
-        android:textSize="24sp" />
 </RelativeLayout>

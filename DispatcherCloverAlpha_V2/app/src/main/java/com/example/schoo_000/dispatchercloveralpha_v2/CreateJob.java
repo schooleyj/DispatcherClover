@@ -40,6 +40,7 @@ public class CreateJob extends AppCompatActivity
 
     private EditText jobNameEditText;
     private EditText descriptionEditText;
+    private BusinessInfo info;
     private Button submitButton;
 
     private String merchantID;
@@ -83,6 +84,7 @@ public class CreateJob extends AppCompatActivity
     {
         super.onResume();
 
+        /*
         if (account == null) {
             account = CloverAccount.getAccount(this);
 
@@ -97,11 +99,14 @@ public class CreateJob extends AppCompatActivity
         connect();
 
         getMerchant();
+        */
 
         jobNameString = savedValues.getString("jobNameString", "");
         jobNameEditText.setText(jobNameString);
         descriptionString = savedValues.getString("descriptionString", "");
         descriptionEditText.setText(descriptionString);
+
+        info = BusinessInfo.readFromSharedPreferences(savedValues);
     }
 
     private void connect() {
@@ -156,10 +161,10 @@ public class CreateJob extends AppCompatActivity
         try {
             jsonObject.accumulate("job_title", jobNameEditText.getText());
             jsonObject.accumulate("job_desc", descriptionEditText.getText());
-            jsonObject.accumulate("merch_id", merchantID);
-            jsonObject.accumulate("from_loc", merchantAddress); // not sure if this is right
+            jsonObject.accumulate("merch_id", info.getId());
+            jsonObject.accumulate("from_loc", info.getAddress());
             jsonObject.accumulate("to_loc", "<to_loc_here>");
-            jsonObject.accumulate("bus_phone", merchantPhone);
+            jsonObject.accumulate("bus_phone", info.getPhoneNumber());
         } catch (JSONException ex) {
             // this will never happen
         }

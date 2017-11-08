@@ -1,28 +1,44 @@
 package com.example.schoo_000.dispatchercloveralpha_v2;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.content.SharedPreferences.Editor;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.clover.sdk.util.CloverAccount;
+import com.clover.sdk.v1.BindingException;
+import com.clover.sdk.v1.ClientException;
+import com.clover.sdk.v1.ServiceException;
+import com.clover.sdk.v1.merchant.Merchant;
+import com.clover.sdk.v1.merchant.MerchantAddress;
+import com.clover.sdk.v1.merchant.MerchantConnector;
 
 import org.json.JSONObject;
 
 public class CreateBusiness extends AppCompatActivity
 {
+    private String merchantID;
+    private String merchantAddress;
+    private String merchantPhone;
+    private String merchantWebsite;
+    private String merchantName;
+    private Account account;
+    private MerchantConnector merchantConnector;
     private EditText phoneEditText;
     private EditText addressEditText;
-    private EditText emailEditText;
+    private EditText websiteEditText;
     private EditText nameEditText;
 
     private BusinessInfo businessInfo;
@@ -36,7 +52,7 @@ public class CreateBusiness extends AppCompatActivity
 
         phoneEditText = (EditText) findViewById(R.id.phone);
         addressEditText = (EditText) findViewById(R.id.address);
-        emailEditText = (EditText) findViewById(R.id.email);
+        websiteEditText = (EditText) findViewById(R.id.website);
         nameEditText = (EditText)findViewById(R.id.businessName);
 
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
@@ -44,21 +60,48 @@ public class CreateBusiness extends AppCompatActivity
 
     private void retrieveBusinessInfo() {
         businessInfo = new BusinessInfo();
-        businessInfo.setAddress(savedValues.getString("addressString", ""));
+
+        if (merchantID != null) {
+            businessInfo.setId(merchantID);
+        }
+
+        if (merchantAddress != null) {
+            Log.d("CreateBusiness", "Setting address from Clover SDK");
+            businessInfo.setAddress(merchantAddress);
+        } else {
+            businessInfo.setAddress(savedValues.getString("addressString", ""));
+        }
         addressEditText.setText(businessInfo.getAddress());
 
-        businessInfo.setEmail(savedValues.getString("emailString", ""));
-        emailEditText.setText(businessInfo.getEmail());
+        if (merchantWebsite != null) {
+            Log.d("CreateBusiness", "Setting website from Clover SDK");
+            businessInfo.setWebsite(merchantWebsite);
+        } else {
+            businessInfo.setWebsite(savedValues.getString("websiteString", ""));
+        }
+        websiteEditText.setText(businessInfo.getWebsite());
 
-        businessInfo.setName(savedValues.getString("nameString", ""));
+        if (merchantName != null) {
+            Log.d("CreateBusiness", "Setting name from Clover SDK");
+            businessInfo.setName(merchantName);
+        } else {
+            businessInfo.setName(savedValues.getString("nameString", ""));
+        }
         nameEditText.setText(businessInfo.getName());
 
-        businessInfo.setPhoneNumber(savedValues.getString("phoneString", ""));
+        if (merchantPhone != null) {
+            Log.d("CreateBusiness", "Setting phone from Clover SDK");
+            businessInfo.setPhoneNumber(merchantPhone);
+        } else {
+            businessInfo.setPhoneNumber(savedValues.getString("phoneString", ""));
+        }
         phoneEditText.setText(businessInfo.getPhoneNumber());
     }
 
     private void updateBusinessInfo() {
         Editor editor = savedValues.edit();
+
+        editor.putString("merchantID", businessInfo.getId());
 
         businessInfo.setPhoneNumber(phoneEditText.getText().toString());
         editor.putString("phoneString", businessInfo.getPhoneNumber());
@@ -69,10 +112,68 @@ public class CreateBusiness extends AppCompatActivity
         businessInfo.setAddress(addressEditText.getText().toString());
         editor.putString("addressString", businessInfo.getAddress());
 
-        businessInfo.setEmail(emailEditText.getText().toString());
-        editor.putString("emailString", businessInfo.getEmail());
+        businessInfo.setWebsite(websiteEditText.getText().toString());
+        editor.putString("websiteString", businessInfo.getWebsite());
 
         editor.commit();
+    }
+    private void getMerchant() {
+        new AsyncTask<Void, Void, Merchant>() {
+            @Override
+            protected Merchant doInBackground(Void... params) {
+                Merchant merchant = null;
+                try {
+                    merchant = merchantConnector.getMerchant();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } catch (ClientException e) {
+                    e.printStackTrace();
+                } catch (ServiceException e) {
+                    e.printStackTrace();
+                } catch (BindingException e) {
+                    e.printStackTrace();
+                }
+                return merchant;
+            }
+
+            @Override
+            protected void onPostExecute(Merchant merchant) {
+                super.onPostExecute(merchant);
+
+                if (!isFinishing()) {
+                    merchantID = merchant.getId();
+                    MerchantAddress address = merchant.getAddress();
+                    // we're in North America for now
+                    merchantAddress = address.getAddress1() + " " + address.getCity() + ", " +
+                        address.getState() + " " + address.getZip();
+                    merchantPhone = merchant.getPhoneNumber();
+                    merchantName = merchant.getName();
+                    merchantWebsite = merchant.getWebsite();
+                    Log.d("CreateBusiness", "MerchantID = " + merchantID);
+                    Log.d("CreateBusiness", "MerchantAddress = " + merchantAddress);
+                    Log.d("CreateBusiness", "MerchantPhone = " + merchantPhone);
+                    Log.d("CreateBusiness", "MerchantName = " + merchantName);
+                    Log.d("CreateBusiness", "MerchantWebsite = " + merchantWebsite);
+
+                    retrieveBusinessInfo();
+                }
+            }
+        }.execute();
+    }
+
+    private void connect() {
+        disconnect();
+        if (account != null) {
+            merchantConnector = new MerchantConnector(this, account, null);
+            merchantConnector.connect();
+        }
+    }
+
+    private void disconnect() {
+        if (merchantConnector != null) {
+            merchantConnector.disconnect();
+            merchantConnector = null;
+        }
     }
 
     public void onPause()
@@ -85,7 +186,21 @@ public class CreateBusiness extends AppCompatActivity
     {
         super.onResume();
 
-        retrieveBusinessInfo();
+        if (account == null) {
+            account = CloverAccount.getAccount(this);
+
+            if (account == null) {
+                Toast.makeText(this, getString(R.string.no_account),
+                    Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+        }
+
+        // TODO: handle errors in getting merchant better
+        connect();
+
+        getMerchant();
     }
 
     public void registerBusiness(View v) {

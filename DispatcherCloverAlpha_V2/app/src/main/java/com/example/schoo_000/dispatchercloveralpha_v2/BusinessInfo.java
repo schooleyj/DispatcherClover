@@ -1,5 +1,7 @@
 package com.example.schoo_000.dispatchercloveralpha_v2;
 
+import android.content.SharedPreferences;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,8 +10,9 @@ import org.json.JSONObject;
  */
 
 public class BusinessInfo {
+    private String id;
     private String name;
-    private String email;
+    private String website;
     private String phoneNumber;
     private String address;
 
@@ -21,12 +24,12 @@ public class BusinessInfo {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getWebsite() {
+        return website;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getPhoneNumber() {
@@ -48,8 +51,7 @@ public class BusinessInfo {
     public JSONObject getJSON() {
         JSONObject result = new JSONObject();
         try {
-            // not sure what to do with merchant id, for now same as name
-            result.accumulate("merch_id", name);
+            result.accumulate("merch_id", id);
             result.accumulate("merch_name", name);
             result.accumulate("phone_num",phoneNumber);
             result.accumulate("merch_address", address);
@@ -58,5 +60,23 @@ public class BusinessInfo {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static BusinessInfo readFromSharedPreferences(SharedPreferences prefs) {
+        BusinessInfo result = new BusinessInfo();
+        result.setId(prefs.getString("merchantID", ""));
+        result.setName(prefs.getString("nameString", ""));
+        result.setPhoneNumber(prefs.getString("phoneString", ""));
+        result.setAddress(prefs.getString("addressString", ""));
+        result.setWebsite(prefs.getString("emailString", ""));
+        return result;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

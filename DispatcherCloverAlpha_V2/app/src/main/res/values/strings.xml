@@ -9,8 +9,8 @@
     <string name="phone">1234567890</string>
     <string name="address_label">Address:</string>
     <string name="address">123 Apple Street</string>
-    <string name="email_label">Email:</string>
-    <string name="email">johndoe@hotmail.com</string>
+    <string name="website_label">Website:</string>
+    <string name="website">testmerchant.com</string>
     <string name="submit_business">Submit</string>
     <string name="no_account">No account found!</string>
     <string name="businessName">Business Name</string>
